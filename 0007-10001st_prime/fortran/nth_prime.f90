@@ -19,7 +19,6 @@ contains
       lnx = log(real(x))
       lnlnx = log(log(real(x)))
       max_primes = 2*int(x * lnx + x * lnlnx - x + (x*lnlnx - 2.1*x)/lnx)
-      print *, max_primes
 
       allocate(is_prime(1:max_primes), stat=i)
       if (i /= 0) stop "Allocation failed"
