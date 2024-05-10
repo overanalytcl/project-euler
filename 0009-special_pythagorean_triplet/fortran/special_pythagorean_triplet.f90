@@ -1,7 +1,7 @@
 program special_pythagorean_triplet
    implicit none
 
-   integer, parameter :: N = 60
+   integer, parameter :: N = 1000
    integer(kind=8) :: sqrt_n, ni, i, a, b, c
 
    ! Solving for a general N
@@ -31,10 +31,9 @@ program special_pythagorean_triplet
          b = 2 * i * ni
          c = i**2 + ni**2
 
-         print *, a*b*c, i, ni
          ! If it's a Pythagorean triple, it has to form a valid right triangle.
          if (c < a + b) then
-            print *, a*b*c, i, ni
+            print *, a*b*c
             exit
          end if
       end if
