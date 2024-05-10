@@ -1,90 +1,54 @@
 program highly_divisible_triangular_number
    implicit none
 
-   integer, parameter :: no_of_divisors = 500
-   ! Based on experimental evidence
-   integer, parameter :: sieve_limit = 13056
-   integer, parameter :: max_num = sieve_limit / 64 + 1
-   integer :: primes(max_num), i, j, isqrt
-   integer(kind=8) :: sum
-
-   isqrt = int(sqrt(real(sieve_limit)))
-   primes = 0
-
-   do i = 3, isqrt, 2
-      if (is_prime(primes, i)) then
-         do j = i * i, sieve_limit, i * 2
-            call mark_composite(primes, j)
-         end do
-      end if
-   end do
-
-   sum = find_number(no_of_divisors)
-   print *, sum
+   print *, find_number(500)
 
 contains
 
-   logical function is_prime(prime, x)
-      integer, intent(in) :: prime(max_num)
-      integer, intent(in) :: x
-
-      is_prime = .not. btest(prime((x-1)/64 + 1), x / 2)
-   end function is_prime
-
-   subroutine mark_composite(prime, x)
-      integer, intent(inout) :: prime(max_num)
-      integer, intent(in) :: x
-
-      prime((x-1)/64 + 1) = ibset(prime((x-1)/64 + 1), mod(x/2, 32))
-   end subroutine mark_composite
-
    integer(kind=8) function count_divisors(n) result(total)
-      integer, intent(in) :: n
+      integer(kind=8), intent(in) :: n
+      integer :: sum, i, nn
 
-      integer :: p, count, temp
-      temp = n
+      sum = 1
       total = 1
+      nn = n
 
-      do p = 2, temp
-         if (is_prime(primes, p)) then
-            count = 0
-            if (mod(temp, p) == 0) then
-               do while (mod(temp, p) == 0)
-                  temp = temp / p
-                  count = count + 1
-               end do
-               total = total * (count + 1)
-            end if
-         end if
+      do while (mod(nn, 2) == 0)
+         sum = sum + 1
+         nn = nn / 2
       end do
+
+      total = total * sum
+
+      i = 3
+      do while (i * i <= nn)
+         sum = 1
+         do while (mod(nn, i) == 0)
+            sum = sum + 1
+            nn = nn / i
+         end do
+         total = total * sum
+         i = i + 2
+      end do
+
+      if (nn > 2) then
+         total = total * 2
+      end if
    end function count_divisors
 
-   integer function find_number(n) result(number)
-      integer, intent(in) :: n
-      integer :: i, count, first, second
+   integer(kind=8) function find_number(limit) result(num)
+      integer, intent(in) :: limit
+      integer(kind=8) :: triangle, divisors
 
-      if (n == 3) then
-         number = 3
-      end if
+      triangle = 1
+      divisors = 1
 
-      i = 2
-      count = 0
-      second = 1
-      first = 1
-
-      do while (count <= n)
-         if (mod(i, 2) == 0) then
-            first = count_divisors(i + 1)
-            count = first * second
-         else
-            second = count_divisors((i + 1) / 2)
-            count = first * second
-         end if
-         i = i + 1
+      do while (divisors <= limit)
+         triangle = triangle + 1
+         divisors = count_divisors(triangle * (triangle + 1) / 2)
       end do
 
-      number = i * (i - 1) / 2
+      num = triangle * (triangle + 1) / 2
    end function find_number
-
 
 end program highly_divisible_triangular_number
