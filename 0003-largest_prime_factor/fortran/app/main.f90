@@ -1,4 +1,4 @@
-program largestprimefactor
+program main
    implicit none
 
    integer, parameter :: knd = selected_int_kind (12)
@@ -14,7 +14,7 @@ program largestprimefactor
 
    limit = int(sqrt(real(n)))
    do i = 3, limit, 2
-      do while (mod(n, i) == 0) 
+      do while (mod(n, i) == 0)
          max_factor = i
          n = n / i
       end do
@@ -25,4 +25,4 @@ program largestprimefactor
    end if
 
    print *, max_factor
-end program largestprimefactor
+end program main
