@@ -1,9 +1,7 @@
 name = "smallest_multiple"
 version = "0.1.0"
-license = "license"
+license = "GNU GPLv3"
 author = "Ștefan Alecu"
-maintainer = "165364995+overanalytcl@users.noreply.github.com"
-copyright = "Copyright 2024, Ștefan Alecu"
 [build]
 auto-executables = true
 auto-tests = true
