@@ -1,13 +1,8 @@
-program multiples
+module multiples
    implicit none
+   private
 
-   integer, parameter :: limit = 1000
-   integer :: sum
-
-   sum = gauss_div(limit, 3) + gauss_div(limit, 5) - gauss_div(limit, 15)
-
-   print *, "The sum of all multiples of 3 or 5 below", limit, "is:", sum
-
+   public :: gauss_div
 contains
    integer function gauss(x)
       implicit none
@@ -21,4 +16,4 @@ contains
       integer, intent(in) :: n, div
       g = div * gauss((n - 1) / div)
    end function gauss_div
-end program multiples
+end module multiples
