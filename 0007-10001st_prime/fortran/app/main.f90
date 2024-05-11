@@ -1,11 +1,7 @@
 program main
-   use nth_prime, only: find_nth_prime
+   use nth_prime_mod, only: nth_prime
    implicit none
 
    integer, parameter :: n = 10001
-   integer :: prime
-
-   prime = find_nth_prime(n)
-
-   print *, prime
+   print *, nth_prime(n)
 end program main

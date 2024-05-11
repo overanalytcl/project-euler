@@ -1,10 +1,10 @@
-module nth_prime
+module nth_prime_mod
    implicit none
    private
 
-   public :: find_nth_prime
+   public :: nth_prime
 contains
-   integer function find_nth_prime(x) result(retval)
+   integer function nth_prime(x) result(retval)
       integer, intent(in) :: x
       integer :: max_primes, i, j, count
       real :: lnx, lnlnx
@@ -38,5 +38,5 @@ contains
          end if
       end do
       deallocate(is_prime)
-   end function find_nth_prime
-end module nth_prime
+   end function nth_prime
+end module nth_prime_mod
