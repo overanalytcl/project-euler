@@ -1,4 +1,4 @@
-program special_pythagorean_triplet
+program main
    implicit none
 
    integer, parameter :: N = 1000
@@ -25,7 +25,7 @@ program special_pythagorean_triplet
          exit
       end if
 
-      
+
       if (2 * i * (i+ni) == N) then
          a = i**2 - ni**2
          b = 2 * i * ni
@@ -38,4 +38,4 @@ program special_pythagorean_triplet
          end if
       end if
    end do
-end program special_pythagorean_triplet
+end program main
