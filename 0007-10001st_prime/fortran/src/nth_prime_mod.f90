@@ -6,37 +6,39 @@ module nth_prime_mod
 contains
    integer function nth_prime(x) result(retval)
       integer, intent(in) :: x
+      integer, allocatable :: primes(:)
+
       integer :: max_primes, i, j, count
-      real :: lnx, lnlnx
-      logical, allocatable :: is_prime(:)
 
-      ! Heuristic to estimate the bound for is_prime
+      ! Heuristic to estimate the bound for no. of primes
       ! https://math.stackexchange.com/a/2742578
-      lnx = log(real(x))
-      lnlnx = log(log(real(x)))
-      max_primes = 2*int(x * lnx + x * lnlnx - x + (x*lnlnx - 2.1*x)/lnx)
+      max_primes = 2 * x * nint(log(real(x)) + log(log(real(x))) - 1 + (log(log(real(x))) - 2.1) / log(real(x)))
 
-      allocate(is_prime(1:max_primes), stat=i)
-      if (i /= 0) then 
-        stop "Allocation failed"
+      allocate(primes(max_primes), stat=i)
+
+      if (i /= 0) then
+         stop "Allocation failed"
       end if
 
-      is_prime = .true.
-      is_prime(1:2) = .false.
+      primes = 1
+      primes(1:2) = 0
 
       count = 0
       do i = 2, max_primes
-         if (is_prime(i)) then
+         if (primes(i) == 1) then
             count = count + 1
+
             if (count == x) then
                retval = i
+               deallocate(primes)
                return
             end if
-            do j = 2*i, max_primes, i
-               is_prime(j) = .false.
-            end do
+
+            primes(2*i:max_primes:i) = 0
          end if
       end do
-      deallocate(is_prime)
+
+      deallocate(primes)
    end function nth_prime
+
 end module nth_prime_mod
