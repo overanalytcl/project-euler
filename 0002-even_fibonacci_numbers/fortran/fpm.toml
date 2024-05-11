@@ -1,6 +1,6 @@
 name = "evenfibo"
 version = "0.1.0"
-license = "license"
+license = "GNU GPLv3"
 author = "Ștefan Alecu"
 [build]
 auto-executables = true
