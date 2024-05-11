@@ -1,10 +1,9 @@
-program highly_divisible_triangular_number
+module find_hdtn_mod
    implicit none
+   private
 
-   print *, find_number(500)
-
+   public :: find_number
 contains
-
    integer(kind=8) function count_divisors(n) result(total)
       integer(kind=8), intent(in) :: n
       integer :: sum, i, nn
@@ -50,5 +49,4 @@ contains
 
       num = triangle * (triangle + 1) / 2
    end function find_number
-
-end program highly_divisible_triangular_number
+end module find_hdtn_mod
