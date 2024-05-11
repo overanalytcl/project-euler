@@ -1,4 +1,4 @@
-program largest_product_in_a_series
+program main
    implicit none
 
    integer(kind=8) :: product, max_product
@@ -81,4 +81,4 @@ program largest_product_in_a_series
    end do
 
    print *, max_product
-end program largest_product_in_a_series
+end program main
