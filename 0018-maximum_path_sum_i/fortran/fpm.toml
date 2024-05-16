@@ -1,4 +1,4 @@
-name = "maximum_problem_sum_i"
+name = "maximum_path_sum_i"
 version = "0.1.0"
 license = "GNU GPLv3"
 author = "Ștefan Alecu"
